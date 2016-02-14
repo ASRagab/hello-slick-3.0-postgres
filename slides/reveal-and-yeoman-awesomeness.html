@@ -1,0 +1,11 @@
+<h3>Code Slide</h3>
+
+<pre><code data-trim data-noescape>
+    def mapper[A <: BaseDAO, B <: DatabaseAccessObject, T <: TableQuery[E], E <: AbstractTable[_]]
+        (query: T, f: B => A) : Seq[A] = {
+    val result = exec(query.result)
+    result.map(o => f(o.asInstanceOf[B]))
+    }
+
+    def exec[T](action: DBIO[T]): T = Await.result(db.run(action), 4 seconds)
+</code></pre>

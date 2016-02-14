@@ -1,0 +1,35 @@
+[
+    {
+        "filename": "index.md",
+        "attr": {
+            "data-background": "#440000"
+        }
+    },
+    [
+        {
+            "filename": "reveal-and-yeoman-awesomeness.html",
+            "attr": {
+                "data-background": "#440000",
+                "data-transition": "convex",
+                "id": "code1"
+            }
+        },
+        {
+            "filename": "reveal-and-yeoman-awesomeness-part-2.html",
+            "attr": {
+                "data-background": "#440000",
+                "data-transition": "zoom",
+                "id": "repl"
+            }
+        }
+    ],
+    {
+        "filename": "animation.html",
+        "attr": {
+            "data-background": "#440000",
+            "id": "edgeanimation"
+        }
+
+    }
+
+]

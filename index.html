@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Reveal.js and Yeoman is Awesomeness</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
+
+        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/blood.css" id="theme">
+
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="bower_components/highlightjs/styles/solarized-dark.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'bower_components/reveal.js/css/print/pdf.css' : 'bower_components/reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="bower_components/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <div class="slides">
+
+                
+                    
+                        
+    <section data-background="#440000" data-markdown="slides/index.md"></section>
+
+
+                    
+                    
+                
+                    
+                    
+                        <section>
+                            
+                                
+    <section data-background="#440000" data-transition="convex" id="code1" data-html="slides/reveal-and-yeoman-awesomeness.html"></section>
+
+
+                            
+                                
+    <section data-background="#440000" data-transition="zoom" id="repl" data-html="slides/reveal-and-yeoman-awesomeness-part-2.html"></section>
+
+
+                            
+                        </section>
+                    
+                
+                    
+                        
+    <section data-background="#440000" id="edgeanimation" data-html="slides/animation.html"></section>
+
+
+                    
+                    
+                
+            </div>
+
+        </div>
+
+        <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+        <script src="bower_components/reveal.js/js/reveal.js"></script>
+        <script>
+
+          // Full list of configuration options available at:
+          // https://github.com/hakimel/reveal.js#configuration
+          Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'convex', // none/fade/slide/convex/concave/zoom
+              anything: [
+                  {
+                      className: "anything",
+                      initialize: (function(container, options) {
+                          if(options && options.initialize) {
+                              options.initialize(container)
+                          }
+                      })
+                  }
+              ],
+
+            // Optional reveal.js plugins
+            dependencies: [
+              { src: 'edge_includes/edge.6.0.0.min.js', callback: function() {
+                  AdobeEdge.loadComposition('clientserver', 'clientserver', {
+                  scaleToFit: "none",
+                  centerStage: "none",
+                  minW: "0px",
+                  maxW: "undefined",
+                  width: "730px",
+                  height: "384px"
+              }, {"dom": {}}, {"dom": {}});}},
+              { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( '[data-html]' ) || !!document.querySelector( 'pre code' ) || !!document.querySelector( '[data-markdown]' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true },
+              { src: 'js/loadhtmlslides.js', condition: function() { return !!document.querySelector( '[data-html]' ); } },
+              { src: 'bower_components/reveal.js/plugin/anything/anything.js' },
+              { src: 'bower_components/p5.js/lib/p5.js' },
+              { src: 'clientserver_edge.js'}
+
+            ]
+          });
+
+        </script>
+    <script>
+
+
+
+        Reveal.addEventListener('fragmentshown', function (event) {
+            var element = document.querySelector('.current-fragment');
+
+            if(event.fragment.classList.contains('populate')) {
+
+                var elementToPopulate = document.createElement('span');
+                elementToPopulate.setAttribute('class', 'doIt');
+                elementToPopulate.innerHTML = "--Do It";
+                elementToPopulate.setAttribute('style', 'font-style: italic');
+
+                var exists = [].some.call(element.children, function (el) {
+                    return el.getAttribute('class') === 'doIt';
+                });
+
+                if(!exists)
+                    element.appendChild(elementToPopulate);
+            }
+
+            if(element.id === 'request') {
+                AdobeEdge.getComposition("clientserver").getStage().play("continue")
+            }
+
+        });
+
+        Reveal.addEventListener('slidechanged', function(event) {
+           var elements = document.querySelectorAll('.doIt');
+            [].forEach.call(elements, function(element) {
+                element.parentNode.removeChild(element);
+            });
+
+            if(Reveal.isReady() && event.currentSlide.id === 'edgeanimation') {
+                AdobeEdge.getComposition("clientserver").getStage().play("start");
+            }
+        });
+    </script>
+    </body>
+
+</html>
